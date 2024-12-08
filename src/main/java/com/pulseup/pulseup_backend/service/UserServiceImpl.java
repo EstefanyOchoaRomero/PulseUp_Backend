@@ -31,6 +31,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(UserRegistrationDTO userDTO) {
+
+        String encodedPassword = passwordEncoder.encode(userDTO.getContrasena());
         
         User user = new User();
         user.setNombre(userDTO.getNombre());
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
         user.setGustoMusical(userDTO.getGustoMusical());
         user.setEstiloVestir(userDTO.getEstiloVestir());
         user.setCorreoElectronico(userDTO.getCorreoElectronico());
-        user.setContrasena(userDTO.getContrasena());
+        user.setContrasena(encodedPassword);
     
         return userRepository.save(user);
 
@@ -50,8 +52,9 @@ public class UserServiceImpl implements UserService {
         
     @Override
     public User authenticateUser(UserLoginDTO userDTO) {
+        String encodedPassword = passwordEncoder.encode(userDTO.getContrasena());
         Optional<User> usuario = userRepository.findByCorreoElectronico(userDTO.getCorreoElectronico());
-        if (usuario.isPresent() && passwordEncoder.matches(userDTO.getContrasena(), usuario.get().getContrasena())) {
+        if (usuario.isPresent() && passwordEncoder.matches(encodedPassword, usuario.get().getContrasena())) {
             return usuario.get();
         }
         throw new RuntimeException("Invalid credentials");
