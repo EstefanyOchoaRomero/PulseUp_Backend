@@ -32,39 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignorar directorios del sistema y archivos de usuario
-.DS_Store
-Thumbs.db
-*.log
-*.tmp
-*.swp
 
-# Ignorar dependencias y configuraciones del sistema
-node_modules/
-build/
-dist/
-target/
-.idea/
-.vscode/
-*.iml
-*.class
-*.war
-
-# Ignorar carpetas personales específicas
-../../../Documents/
-../../../Downloads/
-../../../Music/
-../../../Pictures/
-../../../Desktop/
-../../../Videos/
-../../../AppData/
-../../../Favorites/
-
-# Ignorar carpetas y archivos generados
-*.exe
-*.blend
-*.pyc
-*.zip
-*.rar
-*.7z
 

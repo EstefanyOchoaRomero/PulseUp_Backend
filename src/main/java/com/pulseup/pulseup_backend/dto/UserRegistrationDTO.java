@@ -4,6 +4,7 @@ package com.pulseup.pulseup_backend.dto;
 
 import lombok.Data;
 
+
 @Data
 public class UserRegistrationDTO {
     private String nombre;
@@ -14,4 +15,3 @@ public class UserRegistrationDTO {
     private String correoElectronico;
     private String contrasena;
 }
-

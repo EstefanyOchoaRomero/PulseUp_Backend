@@ -6,7 +6,6 @@ package com.pulseup.pulseup_backend.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pulseup.pulseup_backend.dto.UserLoginDTO;
@@ -15,29 +14,32 @@ import com.pulseup.pulseup_backend.models.User;
 import com.pulseup.pulseup_backend.repository.UserRepository;
 
 
+
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
-    public User registerUser(UserRegistrationDTO userDTO) {
+    public User userRegistration(UserRegistrationDTO userDTO) {
+
         User user = new User();
-        user.setNombre(userDTO.getNombre());
+        user.setNombre(userRegistrationDTO.getNombre());
         user.setApellido(userDTO.getApellido());
         user.setApodo(userDTO.getApodo());
         user.setGustoMusical(userDTO.getGustoMusical());
         user.setEstiloVestir(userDTO.getEstiloVestir());
         user.setCorreoElectronico(userDTO.getCorreoElectronico());
-        user.setContrasena(passwordEncoder.encode(userDTO.getContrasena()));
-        user.setProveedorAutenticacion("correo");
+        user.setContrasena(userDTO.getContrasena());
 
         return userRepository.save(user);
     }
+
+
+    
+
+
 
 
 
