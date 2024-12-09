@@ -1,8 +1,6 @@
 package com.pulseup.pulseup_backend.service;
 
 
-
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +14,11 @@ import com.pulseup.pulseup_backend.repository.UserRepository;
 
 import lombok.Data;
 
+
+
 @Data
 
 @Service
-
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -28,10 +27,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @Override
     public User registerUser(UserRegistrationDTO userDTO) {
-
         String encodedPassword = passwordEncoder.encode(userDTO.getContrasena());
         
         User user = new User();
@@ -44,12 +41,8 @@ public class UserServiceImpl implements UserService {
         user.setContrasena(encodedPassword);
     
         return userRepository.save(user);
-
-
-        
     }
 
-        
     @Override
     public User authenticateUser(UserLoginDTO userDTO) {
         String encodedPassword = passwordEncoder.encode(userDTO.getContrasena());
@@ -59,7 +52,56 @@ public class UserServiceImpl implements UserService {
         }
         throw new RuntimeException("Invalid credentials");
     }
+
+    
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    
+
+    public User updateUser(Long userId, UserRegistrationDTO userDTO) {
+        Optional<User> existingUser = userRepository.findById(userId);
+        if (!existingUser.isPresent()) {
+            throw new RuntimeException("User not found");
+        }
+
+        User user = existingUser.get();
+        user.setNombre(userDTO.getNombre());
+        user.setCorreoElectronico(userDTO.getCorreoElectronico());
+        user.setApodo(userDTO.getApodo());
+        user.setGustoMusical(userDTO.getGustoMusical());
+        user.setEstiloVestir(userDTO.getEstiloVestir());
+
+        return userRepository.save(user);
+    }
+
+    
+    
+    public User updatePassword(Long userId, String currentPassword, String newPassword) {
+        Optional<User> existingUser = userRepository.findById(userId);
+        if (!existingUser.isPresent()) {
+            throw new RuntimeException("User not found");
+        }
+
+        User user = existingUser.get();
+
+        
+        if (!passwordEncoder.matches(currentPassword, user.getContrasena())) {
+            throw new RuntimeException("Current password is incorrect");
+        }
+
+        
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setContrasena(encodedPassword);
+
+        return userRepository.save(user);
+    }
+
+
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }
-
-
-
