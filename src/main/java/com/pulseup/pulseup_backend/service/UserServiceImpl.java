@@ -54,14 +54,16 @@ public class UserServiceImpl implements UserService {
     }
 
     
-
+    
+    @Override
     public User getUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     
-
+    
+    @Override
     public User updateUser(Long userId, UserRegistrationDTO userDTO) {
         Optional<User> existingUser = userRepository.findById(userId);
         if (!existingUser.isPresent()) {
@@ -80,6 +82,7 @@ public class UserServiceImpl implements UserService {
 
     
     
+    @Override
     public User updatePassword(Long userId, String currentPassword, String newPassword) {
         Optional<User> existingUser = userRepository.findById(userId);
         if (!existingUser.isPresent()) {
@@ -100,7 +103,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-
+    
+    @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
