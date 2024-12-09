@@ -1,63 +1,46 @@
 package com.pulseup.pulseup_backend.config;
 
-import java.util.Optional;
+import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.pulseup.pulseup_backend.dto.UserLoginDTO;
-import com.pulseup.pulseup_backend.models.User;
-import com.pulseup.pulseup_backend.repository.UserRepository;
 import com.pulseup.pulseup_backend.security.JwtAuthenticationFilter;
 
-import lombok.Data;
 
-
-
-
-@Data
 @EnableWebSecurity
 @Configuration
-
-
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    @Autowired
-    private UserRepository userRepository;
-
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
+            .cors().and()
             .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(request -> request.getRequestURI().equals("/api/auth/register")).permitAll()
-                .anyRequest().authenticated())
-            .httpBasic();
+                .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Agrega el filtro JWT
         return http.build();
-    }
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    public User authenticateUser(UserLoginDTO userDTO) {
-        String encodedPassword = passwordEncoder.encode(userDTO.getContrasena());
-        Optional<User> usuario = userRepository.findByCorreoElectronico(userDTO.getCorreoElectronico());
-        if (usuario.isPresent() && passwordEncoder.matches(encodedPassword, usuario.get().getContrasena())) {
-            return usuario.get();
-        }
-        throw new RuntimeException("Invalid credentials");
     }
 
     @Bean
@@ -65,8 +48,33 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:8080");  // Asegúrate de usar el origen correcto
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:8080").allowedMethods("*");
+            }
+        };
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+    
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
+    
+    config.setAllowedOrigins(Arrays.asList("http://localhost:8080")); // Cambia esto si tu frontend está en otro puerto
+    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+    config.setAllowedHeaders(Arrays.asList("*"));
+    source.registerCorsConfiguration("/**", config);
+        
+        return new CorsFilter(source);
+}
+
 }
