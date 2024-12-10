@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     
-    @PostMapping("/api/auth/login")
+    @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> authenticateUser(@RequestBody UserLoginDTO loginDTO) {
         try {
         

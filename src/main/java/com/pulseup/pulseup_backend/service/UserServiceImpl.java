@@ -45,9 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User authenticateUser(UserLoginDTO userDTO) {
-        String encodedPassword = passwordEncoder.encode(userDTO.getContrasena());
+        String contrasena = userDTO.getContrasena();
         Optional<User> usuario = userRepository.findByCorreoElectronico(userDTO.getCorreoElectronico());
-        if (usuario.isPresent() && passwordEncoder.matches(encodedPassword, usuario.get().getContrasena())) {
+        if (usuario.isPresent() && passwordEncoder.matches(contrasena, usuario.get().getContrasena())) {
             return usuario.get();
         }
         throw new RuntimeException("Invalid credentials");
