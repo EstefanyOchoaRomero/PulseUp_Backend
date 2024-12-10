@@ -14,7 +14,7 @@ public class UserRegistrationDTO {
     private String estiloVestir;
     private String correoElectronico;
     private String contrasena;
-    private String proveedorAutenticacion;
+    
 }
 
 

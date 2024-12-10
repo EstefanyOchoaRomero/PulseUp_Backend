@@ -3,6 +3,10 @@ package com.pulseup.pulseup_backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,47 +19,64 @@ import com.pulseup.pulseup_backend.models.User;
 import com.pulseup.pulseup_backend.security.JwtTokenProvider;
 import com.pulseup.pulseup_backend.service.UserService;
 
-
-@RestController
-@RequestMapping("/api/auth")
-public class AuthController {
-
-    private final UserService userService;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
-
-
+import jakarta.validation.Valid;
     
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationDTO userDTO) {
-        try {
-            User registeredUser = userService.registerUser(userDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    @RestController
+    @RequestMapping("/api/auth")
+    public class AuthController {
+    
+        private final UserService userService;
+    
+        @Autowired
+        private JwtTokenProvider jwtTokenProvider;
+    
+        @Autowired
+        private AuthenticationManager authenticationManager;  // Agregar AuthenticationManager
+    
+        @Autowired
+        public AuthController(UserService userService) {
+            this.userService = userService;
         }
-    }
-
+    
     
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> authenticateUser(@RequestBody UserLoginDTO loginDTO) {
+    public ResponseEntity<AuthResponseDTO> authenticateUser(@RequestBody @Valid UserLoginDTO loginDTO) {
         try {
-        
-            User user = userService.authenticateUser(loginDTO);
+            // Autenticación usando Spring Security
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                    loginDTO.getCorreoElectronico(),
+                    loginDTO.getContrasena()
+                )
+            );
 
-            
-            String token = jwtTokenProvider.generateToken(user.getCorreoElectronico());
+            // Generar token JWT
+            String token = jwtTokenProvider.generateToken(authentication.getName());
 
-            
+            // Responder con el token
             return ResponseEntity.ok(new AuthResponseDTO(token));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(401).body(new AuthResponseDTO("Invalid email or password"));
         } catch (Exception e) {
-            return ResponseEntity.status(401).body(new AuthResponseDTO("Invalid credentials"));
+            return ResponseEntity.status(500).body(new AuthResponseDTO("An unexpected error occurred"));
         }
     }
-}
+
+
+        @PostMapping("/register")
+        public ResponseEntity<?> registerUser(@RequestBody UserRegistrationDTO userDTO) {
+            try {
+                // Registro de usuario
+                User registeredUser = userService.registerUser(userDTO);
+    
+                // Evitar exponer información sensible (como contraseñas)
+                return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser.getCorreoElectronico());
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
+        }
+    
+    }
+
+
+    
