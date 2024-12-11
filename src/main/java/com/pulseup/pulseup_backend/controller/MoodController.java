@@ -25,7 +25,7 @@ public class MoodController {
         return ResponseEntity.ok(moodService.getRecommendations(moodName));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> saveMood(@RequestBody Mood mood) {
         return ResponseEntity.ok(moodService.saveMood(mood));
     }

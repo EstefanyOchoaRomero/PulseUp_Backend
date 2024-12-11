@@ -1,18 +1,18 @@
-package com.pulseup.pulseup_backend.dto;
+// package com.pulseup.pulseup_backend.dto;
 
 
-public class AuthResponseDTO {
-    private String token;
+// public class AuthResponseDTO {
+//     private String token;
 
-    public AuthResponseDTO(String token) {
-        this.token = token;
-    }
+//     public AuthResponseDTO(String token) {
+//         this.token = token;
+//     }
 
-    public String getToken() {
-        return token;
-    }
+//     public String getToken() {
+//         return token;
+//     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-}
+//     public void setToken(String token) {
+//         this.token = token;
+//     }
+// }
