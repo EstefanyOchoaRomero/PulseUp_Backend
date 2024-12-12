@@ -74,13 +74,14 @@ llegue a este punto pero falla en el token del login, el registro de un usuario 
 
 ![Diagrama de clases proyecto personal (1)](https://github.com/user-attachments/assets/563d8a7a-089f-4a33-b690-61d51e420492)
 
+## Cobertura Test Pulse Up
+![test pulse up 2](https://github.com/user-attachments/assets/d0d29886-8516-44dd-8462-455c9c942400)
 
+## Estructura de carpetas
+![estructuras de carpetas pulse up](https://github.com/user-attachments/assets/1049fce2-2cdd-4ff8-8cfd-1ed8f7f553f9)
 
-
-
-
-
-
+## Presentación Pulse Up
+https://www.canva.com/design/DAGXRbhqSn4/DF9RJbWZkeetsovT1YUWsQ/edit?utm_content=DAGXRbhqSn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
 
