@@ -58,6 +58,9 @@ Hice un formulario un login para la idea de como seria visualmente estos element
 ## Muestra Visual de login en fronted eN Vue
 ![Login Pulse up](https://github.com/user-attachments/assets/0bebb36f-4aad-4c45-bda4-6fbb0fd56838)
 
+![formulario pulse up](https://github.com/user-attachments/assets/83f821a2-8b78-43f4-8406-e29a4a311fb5)
+
+
 ### Módulos de la Aplicación 
 Módulo 1: Autenticación y Gestión de Usuarios 
 ● Backend (Java/Spring Boot): 
