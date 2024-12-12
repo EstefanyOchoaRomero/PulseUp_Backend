@@ -3,14 +3,14 @@ package com.pulseup.pulseup_backend.dto;
 
 
 public class MoodRequestDTO {
-    private String name; // Nombre del estado de ánimo
-    private String description; // Descripción opcional del estado de ánimo
+    private String name;
+    private String description;
 
-    // Constructor vacío
+    
     public MoodRequestDTO() {
     }
 
-    // Constructor con parámetros
+    
     public MoodRequestDTO(String name, String description) {
         this.name = name;
         this.description = description;
@@ -25,7 +25,7 @@ public class MoodRequestDTO {
         return description;
     }
 
-    // Setters
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -34,7 +34,7 @@ public class MoodRequestDTO {
         this.description = description;
     }
 
-    // toString
+    
     @Override
     public String toString() {
         return "MoodRequestDTO{" +

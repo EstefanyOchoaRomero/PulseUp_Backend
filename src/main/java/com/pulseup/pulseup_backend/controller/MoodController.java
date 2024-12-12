@@ -53,7 +53,7 @@ public class MoodController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Mood> updateMood(@PathVariable Long id, @RequestBody Mood moodDetails) {
+    public ResponseEntity<?> updateMood(@PathVariable Long id, @RequestBody Mood moodDetails) {
 
         Mood existingMood = moodService.findById(id);
         if (existingMood == null) {
@@ -76,6 +76,16 @@ public class MoodController {
         moodService.deleteMood(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getMood(@PathVariable Long id) {
+
+        Mood existingMood = moodService.findById(id);
+        if (existingMood == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(existingMood);
     }
 
 }
