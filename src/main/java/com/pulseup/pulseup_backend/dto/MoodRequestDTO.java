@@ -16,7 +16,7 @@ public class MoodRequestDTO {
         this.description = description;
     }
 
-    // Getters
+    
     public String getName() {
         return name;
     }

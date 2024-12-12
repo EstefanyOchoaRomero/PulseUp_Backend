@@ -19,7 +19,7 @@ public class Mood {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String name; // Ejemplo: "Ansioso", "Triste", etc.
+    private String name;
 
     @OneToMany(mappedBy = "mood", cascade = CascadeType.ALL)
     private List<Recommendation> recommendations = new ArrayList<>();

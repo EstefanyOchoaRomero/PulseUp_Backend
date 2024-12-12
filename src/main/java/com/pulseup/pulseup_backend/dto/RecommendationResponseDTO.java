@@ -3,20 +3,20 @@ package com.pulseup.pulseup_backend.dto;
 public class RecommendationResponseDTO {
     private Long id;
     private String description;
-    private String moodName; // Incluye el nombre del estado de ánimo asociado
+    private String moodName;
 
-    // Constructor vacío
+    
     public RecommendationResponseDTO() {
     }
 
-    // Constructor con parámetros
+    
     public RecommendationResponseDTO(Long id, String description, String moodName) {
         this.id = id;
         this.description = description;
         this.moodName = moodName;
     }
 
-    // Getters
+    
     public Long getId() {
         return id;
     }
@@ -29,7 +29,7 @@ public class RecommendationResponseDTO {
         return moodName;
     }
 
-    // Setters
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -42,7 +42,7 @@ public class RecommendationResponseDTO {
         this.moodName = moodName;
     }
 
-    // toString
+    
     @Override
     public String toString() {
         return "RecommendationResponseDTO{" +
