@@ -10,4 +10,6 @@ import com.pulseup.pulseup_backend.models.Mood;
 @Repository
 public interface MoodRepository extends JpaRepository<Mood, Long> {
     Optional<Mood> findByName(String name);
+
+    Optional<Mood> findById(long id);
 }
