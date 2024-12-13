@@ -85,6 +85,9 @@ llegue a este punto pero falla en el token del login, el registro de un usuario 
 ## Presentación Pulse Up
 https://www.canva.com/design/DAGXRbhqSn4/DF9RJbWZkeetsovT1YUWsQ/edit?utm_content=DAGXRbhqSn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
+## Documentación 
+https://docs.google.com/document/d/1PBdBeh73blwdBER7HZVveI8LytTAFRe7Ky8dUW7gpHM/edit?usp=sharing
+
 
 
 
