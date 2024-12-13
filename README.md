@@ -69,6 +69,12 @@ Módulo 1: Autenticación y Gestión de Usuarios
 ○ Controlador para autenticación y registro Spring Security y JWT.
 llegue a este punto pero falla en el token del login, el registro de un usuario funciona.
 
+![postgrets registro usuario](https://github.com/user-attachments/assets/fe759d7d-9bb9-41d2-80a2-f1553998786a)
+
+## Postman GET Registro usuarios
+![postman get resgistro](https://github.com/user-attachments/assets/bc4038c2-0a4b-4eef-a4d8-884b4cf08f0b)
+
+
 ## Diagrama de flujo 
 ![Diagramas de flujo Proyecto personal (1)](https://github.com/user-attachments/assets/b926d989-ccff-4b11-afa6-b17b2d70076b)
 
