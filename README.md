@@ -67,7 +67,7 @@ Hice un formulario un login para la idea de como seria visualmente estos element
 Módulo 1: Autenticación y Gestión de Usuarios 
 ● Backend (Java/Spring Boot): 
 ○ Controlador para autenticación y registro Spring Security y JWT.
-llegue a este punto pero falla en el token del login, el registro de un usuario funciona.
+llegue a este punto pero falla en el token del login, el registro de un usuario si funciona.
 
 ![postgrets registro usuario](https://github.com/user-attachments/assets/fe759d7d-9bb9-41d2-80a2-f1553998786a)
 
