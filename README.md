@@ -60,7 +60,8 @@ Hice un formulario un login para la idea de como seria visualmente estos element
 
 ![formulario pulse up](https://github.com/user-attachments/assets/83f821a2-8b78-43f4-8406-e29a4a311fb5)
 
-![botones pulse up](https://github.com/user-attachments/assets/8fb99e01-8fd3-465f-bfce-0a156ff69833)
+
+![Pantalla botones pulse uop](https://github.com/user-attachments/assets/7faf05bc-fd89-45a7-b8ca-8597c3759d71)
 
 
 ### Módulos de la Aplicación 
