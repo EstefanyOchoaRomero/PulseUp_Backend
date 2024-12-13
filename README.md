@@ -60,6 +60,8 @@ Hice un formulario un login para la idea de como seria visualmente estos element
 
 ![formulario pulse up](https://github.com/user-attachments/assets/83f821a2-8b78-43f4-8406-e29a4a311fb5)
 
+![botones pulse up](https://github.com/user-attachments/assets/8fb99e01-8fd3-465f-bfce-0a156ff69833)
+
 
 ### Módulos de la Aplicación 
 Módulo 1: Autenticación y Gestión de Usuarios 
@@ -82,6 +84,8 @@ llegue a este punto pero falla en el token del login, el registro de un usuario 
 
 ## Presentación Pulse Up
 https://www.canva.com/design/DAGXRbhqSn4/DF9RJbWZkeetsovT1YUWsQ/edit?utm_content=DAGXRbhqSn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+
 
 
 
